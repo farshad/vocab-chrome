@@ -1,0 +1,8 @@
+.idea
+node_modules
+.temp
+.tmp
+package
+test
+dist
+app/bower_components

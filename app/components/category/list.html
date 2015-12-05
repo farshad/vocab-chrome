@@ -1,0 +1,51 @@
+<section class="partial flipInX" ng-controller="CategoryListController">
+  <div style="width: 100%;height: 100%;display: inline-block;">
+    <div style="float: left"><h3 style="margin: 0">Categories</h3> </div>
+    <div style="float: right;margin-top: -5px">  <a href="#/category/new" class="btn btn-sm btn-info"><i class="fa fa-plus"></i> Add new category</a></div>
+  </div>
+  <hr style="margin: 10px 0 30px 0" />
+  <div class="well" id="edit-area" style="display: none">
+    <button type="button" id="close-edit-area" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <form class="form-inline" name="categoryForm" ng-submit="categoryForm.$valid && update(editEntityIndex)">
+      <div class="form-group">
+        <label for="catEditName">Name</label>
+        <input type="text"
+               class="form-control"
+               id="catEditName"
+               placeholder="category name"
+               name="name"
+               ng-model="category.name"
+               check-category-name
+               required>
+      </div>
+      <button type="submit" class="btn btn-default">Update</button>
+      <div class="help-bloc" style="width: 35%;margin-top: 10px;margin-bottom: -15px" ng-messages="categoryForm.name.$error"
+           ng-show="categoryForm.$submitted">
+        <div ng-messages-include="../../common/partial/messages.html"></div>
+      </div>
+    </form>
+  </div>
+  <table style="margin-top: 20px" class="table table-striped table-responsive">
+    <tbody>
+      <tr ng-repeat="cat in categoryItems">
+        <td width="1">{{ $index + 1 }}</td>
+        <td width="5"><i style="color: #696969" class="fa fa-book"></i></td>
+        <td><a href="#word/list/{{ cat.id }}" class="link">{{ cat.name }}</a></td>
+        <td width="10">
+          <ul class="nav">
+            <li role="presentation">
+              <a style="background-color: transparent" class="anchorjs-link" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">
+                  <i style="font-size: 17px" class="fa fa-ellipsis-v"></i>
+              </a>
+              <ul class="dropdown-menu" style="margin-top: -5px">
+                <li ng-click="edit($index)"><a href=""><i class="fa fa-pencil"></i> Edit</a></li>
+                <li ng-click="delete(cat.id, $index)"><a href=""><i class="fa fa-trash-o"></i> Delete</a></li>
+              </ul>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-warning col-lg-5 col-lg-offset-3 text-center" srole="alert" ng-show="!categoryItems.length"> Not found!</div>
+</section>

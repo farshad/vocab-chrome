@@ -1,0 +1,58 @@
+<section class="partial flipInX" ng-controller="WordAddController">
+  <h3>Add New word</h3>
+  <hr style="margin: 10px 0 30px 0" />
+  <div class="col-md-6">
+    <form name="wordForm" ng-submit="wordForm.$valid && add()" novalidate>
+      <div class="form-group">
+        <label for="name">word:</label>
+        <input type="text" class="form-control" id="name"
+               placeholder="word"
+               name="name" ng-model="word.name"
+               required>
+        <div class="help-block" ng-messages="wordForm.name.$error"
+                                ng-show="wordForm.name.$touched || wordForm.$submitted">
+          <div ng-messages-include="../../common/partial/messages.html"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="category">category:</label>
+        <select name="category" class="form-control"
+                chosen
+                data-placeholder="Select a Category"
+                ng-model="word.category"
+                ng-options="item.id as item.name for item in categoryItems"
+                required></select>
+        <div class="help-block" ng-messages="wordForm.category.$error"
+             ng-show="wordForm.category.$touched || wordForm.$submitted">
+          <div ng-messages-include="../../common/partial/messages.html"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phonetically">phonetically:</label>
+        <input type="text" class="form-control" id="phonetically"
+               placeholder="phonetically"
+               name="phonetically" ng-model="word.phonetically">
+      </div>
+      <div class="form-group">
+        <label for="meaning">synonym:</label>
+        <input type="text" class="form-control" id="meaning"
+               placeholder="meaning"
+               name="meaning" ng-model="word.meaning">
+      </div>
+      <div class="form-group">
+        <label for="translate">translate:</label>
+        <input type="text" class="form-control" id="translate"
+               placeholder="translate"
+               name="translate" ng-model="word.translate">
+      </div>
+      <div class="form-group">
+        <label for="example">examples:</label>
+        <textarea type="text" class="form-control" id="example"
+               name="example" ng-model="word.example"></textarea>
+      </div>
+      <a href="#/category" class="btn btn-danger">back</a>
+      <button type="submit" class="btn btn-success">save</button>
+    </form>
+    <!-- form -->
+    </div>
+</section>

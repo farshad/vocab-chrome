@@ -1,0 +1,40 @@
+<section class="partial flipInX" ng-controller="UserController">
+  <h3 style="margin: 0">Login</h3>
+  <hr style="margin: 10px 0 30px 0" />
+  <div class="col-md-6">
+    <form name="loginForm" ng-submit="loginForm.$valid && login()" novalidate>
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text"
+               class="form-control"
+               id="username"
+               name="username"
+               placeholder="username or email"
+               ng-model="login.username"
+               required>
+        <div class="help-block" ng-messages="loginForm.username.$error"
+             ng-show="loginForm.username.$touched || loginForm.$submitted">
+          <div ng-messages-include="../../common/partial/messages.html"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Password:</label>
+        <input type="password"
+               class="form-control"
+               id="password"
+               name="password"
+               placeholder="password"
+               ng-model="login.password"
+               required>
+        <div class="help-block" ng-messages="loginForm.password.$error"
+             ng-show="loginForm.password.$touched || loginForm.$submitted">
+          <div ng-messages-include="../../common/partial/messages.html"></div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-info">Login</button>
+      <a href="#user/signup" style="margin-left: 10px">[Create new account]</a>
+    </form>
+    <!-- form -->
+  </div>
+  <!-- /.col-md-3 -->
+</section>

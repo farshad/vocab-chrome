@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.min.css" />
+    <link rel="stylesheet" href="bower_components/chosen/chosen.min.css" />
+    <link rel="import" href="common/lib/voice/voice-elements/dist/voice-player.html">
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="vocab">
+    <div class="col-md-2"></div>
+    <div class="container col-md-8" id="content" ng-controller="MainController">
+      <section class="content-head">
+        <a ng-show="breadcrumbs.back" href="#/{{ breadcrumbs.back }}"><i class="fa fa-arrow-circle-left fa-lg"></i></a>
+       <span style="margin-left: 10px">
+         <a style="text-decoration: none"
+            ng-repeat="(key, value) in breadcrumbs.urls"
+            ng-href="{{ value }}">
+           {{ key }}
+           <span ng-hide="$last">/ </span>
+         </a>
+       </span>
+        <div id="search-box">
+          <div style="position: relative">
+            <input type="search"
+                   id="search-btn"
+                   ng-model="search.key"
+                   ng-change="search()" />
+            <i class="fa fa-search fa-lg noselect" ng-click="toggleSearchBtn()" style="float:right;position: absolute;right: 10px;top: 10px;cursor: pointer;"></i>
+            <div id="sub-search">
+              <ul id="sub-search-result">
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="content-area">
+        <toaster-container toaster-options="{
+          'closeButton': false,
+          'debug': false,
+          'position-class': 'toast-top-left',
+          'showDuration': '200',
+          'hideDuration': '1000',
+          'timeOut': '5000',
+          'extendedTimeOut': '1000',
+          'showEasing': 'swing',
+          'hideEasing': 'linear',
+          'showMethod': 'fadeIn',
+          'hideMethod': 'fadeOut'
+        }"></toaster-container>
+        <div class="col-md-1" id="box-left">
+          <ul class="col-md-12" id="menu">
+            <li><a href="#category"><i class="fa fa-list fa-2x"></i></a></li>
+            <li><a href="#favorite/list"><i class="fa fa-star-o fa-2x"></i></a></li>
+            <li><a href="#sync"><i class="fa fa-refresh fa-2x"></i></a></li>
+            <li><a href="#user/login"><i class="fa fa-user fa-2x"></i></a></li>
+            <li><a href="#user/login"><i class="fa fa-gear fa-2x"></i></a></li>
+          </ul>
+        </div>
+        <!--#/box-left-->
+
+        <div class="col-md-11" style="width: 100%" id="box-right" ng-view=""></div>
+
+      </section>
+      <!--./content-area-->
+
+    </div>
+    <!--./container-->
+    <div class="col-md-2"></div>
+
+    <a href="#word/new">
+      <div class="fab blue">
+        <i class="fa fa-plus fa-2x" style="padding-top: 25%;color: #ffffff" ></i>
+      </div>
+      <!--./fab-->
+    </a>
+
+    <footer class="footer col-md-12">
+        <p><i class="fa fa-code"></i> with <i class="fa fa-heart" style="color: orangered"></i> by <a href="http://twitter.com/fa_ahg">fa_ahg</a>. fork on
+          <a href="https://github.com/farshad/vocab-api">github</a></p>
+    </footer>
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/AngularJS-Toaster/toaster.min.js"></script>
+    <script src="bower_components/chosen/chosen.jquery.min.js"></script>
+    <script src="common/lib/angular-chosen.min.js"></script>
+    <script src="common/lib/voice/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({angular}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="common/service/DatabaseService.js"></script>
+    <script src="../components/main/MainController.js"></script>
+    <script src="../components/category/CategoryController.js"></script>
+    <script src="../components/category/CategoryDirective.js"></script>
+    <script src="../components/word/WordController.js"></script>
+    <script src="../components/word/WordDirective.js"></script>
+    <script src="../components/word/favorite/FavoriteController.js"></script>
+    <script src="../components/user/UserController.js"></script>
+    <script src="../components/sync/SyncController.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js({chrome}) scripts/popup.js -->
+
+    <!-- endbuild -->
+  </body>
+</html>

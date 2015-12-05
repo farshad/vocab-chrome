@@ -1,0 +1,121 @@
+<section  class="partial" ng-controller="WordSliderController">
+  <div style="position: relative;">
+    <div class="noselect" style="position:absolute;margin-top: 15%;cursor:pointer; z-index: 1;color: #5F7C8A">
+      <i ng-click="previous()" class="fa fa-chevron-left fa-2x"></i>
+    </div>
+    <div class="noselect" style="position:absolute;right: 0px;margin-top: 15%;cursor:pointer;z-index: 1;color: #5F7C8A">
+      <i ng-click="next()" class="fa fa-chevron-right fa-2x"></i>
+    </div>
+    <div class="word-slider">
+      <div  ng-repeat="word in wordItems" id="item-{{ word.id }}" class="word-slider-item" show-slider-item>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="col-md-8 word-span">
+              <span>
+                <a href="">
+                  <i class="fa fa-star fa-2x" ng-click="favorite(0, $index)"  ng-show="word.favorite"></i>
+                  <i class="fa fa-star-o fa-2x" ng-click="favorite(1, $index)" ng-show="!word.favorite"></i>
+                </a>
+              </span>
+              <span><h4 id="word-name">{{ word.name }}</h4></span>
+              <span style="cursor: pointer;color:#6f6f6f"><i class="fa fa-volume-up fa-lg" ng-click="voice(word.name)"></i></span>
+              <voice-player id="player" text=""></voice-player>
+              <p ng-show="word.phonetically">[{{ word.phonetically }}]</p>
+              <p ng-show="word.meaning"><span style="color: #00A000">synonym:</span> {{ word.meaning }}</p>
+            </div>
+            <div style="float: right; color: #828282">
+              <ul class="nav">
+                <li role="presentation">
+                  <a style="background-color: transparent" class="anchorjs-link" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i style="font-size: 20px" class="fa fa-ellipsis-v"></i>
+                  </a>
+                  <ul class="dropdown-menu" style="right:0;left: inherit;margin-top: -8px">
+                    <li ng-click="edit($index)" data-toggle="modal" data-target="#editModal"><a href=""><i class="fa fa-pencil"></i> Edit</a></li>
+                    <li ng-click="delete(word.id, $index)"><a href=""><i class="fa fa-trash-o"></i> Delete</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-12" style="text-align: center; margin: 20px auto">
+              <a ng-click="show=!show" class="noselect" style="cursor: pointer;">
+                <span ng-show="show">Hide</span><span ng-hide="show">Show</span>
+                Translate
+              </a>
+              <p ng-show="show" style="margin: 20px 0">{{ word.translate }}</p>
+            </div>
+            <div class="col-md-12">
+              <p ng-repeat="(k, v) in word.example">{{ k + 1 }}. {{ v }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Edit {{ word.name }}</h4>
+        </div>
+        <form name="wordForm" ng-submit="wordForm.$valid && update(editEntityIndex)" novalidate>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="name">word:</label>
+              <input type="text" class="form-control" id="name"
+                     placeholder="word"
+                     name="name" ng-model="word.name"
+                     required>
+              <div class="help-block" ng-messages="wordForm.name.$error"
+                   ng-show="wordForm.name.$touched || wordForm.$submitted">
+                <div ng-messages-include="../../common/partial/messages.html"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="category">category:</label>
+              <select name="category" class="form-control" id="category"
+                      data-placeholder="Select a Category"
+                      chosen
+                      ng-options="item.id as item.name for item in categoryItems"
+                      ng-model="word.category_id"
+                      required></select>
+              <div class="help-block" ng-messages="wordForm.category.$error"
+                   ng-show="wordForm.category.$touched || wordForm.$submitted">
+                <div ng-messages-include="../../common/partial/messages.html"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="phonetically">phonetically:</label>
+              <input type="text" class="form-control" id="phonetically"
+                     placeholder="phonetically"
+                     name="phonetically" ng-model="word.phonetically">
+            </div>
+            <div class="form-group">
+              <label for="meaning">synonym:</label>
+              <input type="text" class="form-control" id="meaning"
+                     placeholder="meaning"
+                     name="meaning" ng-model="word.meaning">
+            </div>
+            <div class="form-group">
+              <label for="translate">translate:</label>
+              <input type="text" class="form-control" id="translate"
+                     placeholder="translate"
+                     name="translate" ng-model="word.translate">
+            </div>
+            <div class="form-group">
+              <label for="example">examples:</label>
+        <textarea class="form-control" id="example"
+                  name="example" ng-model="word.example"></textarea>
+            </div>
+            <!-- form -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-success">Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

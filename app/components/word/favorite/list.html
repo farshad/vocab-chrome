@@ -1,0 +1,84 @@
+<section class="partial flipInX" ng-controller="FavoriteListController">
+  <div style="width: 100%;height: 100%;display: inline-block;">
+    <div style="float: left"><h3 style="margin: 0">Favorite Words</h3> </div>
+  </div>
+  <hr style="margin: 10px 0 30px 0" />
+  <table style="margin-top: 20px" class="table table-striped table-responsive">
+    <tbody>
+    <tr ng-repeat="word in wordItems">
+      <td width="1">{{ $index + 1 }}</td>
+      <td width="1"><i style="color: #696969" class="fa fa-star"></i></td>
+      <td><a href="#favorite/slider/{{ word.id }}" class="link">{{ word.name }}</a></td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-warning col-lg-5 col-lg-offset-3 text-center" srole="alert" ng-if="!wordItems"> Not found!</div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Edit {{ word.name }}</h4>
+        </div>
+        <form name="wordForm" ng-submit="wordForm.$valid && update(editEntityIndex)" novalidate>
+        <div class="modal-body">
+            <div class="form-group">
+              <label for="name">word:</label>
+              <input type="text" class="form-control" id="name"
+                     placeholder="word"
+                     name="name" ng-model="word.name"
+                     required>
+              <div class="help-block" ng-messages="wordForm.name.$error"
+                   ng-show="wordForm.name.$touched || wordForm.$submitted">
+                <div ng-messages-include="../../common/partial/messages.html"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="category">category:</label>
+              <select name="category" class="form-control" id="category"
+                      data-placeholder="Select a Category"
+                      chosen
+                      ng-options="item.id as item.name for item in categoryItems"
+                      ng-model="word.category_id"
+                      required></select>
+              <div class="help-block" ng-messages="wordForm.category.$error"
+                   ng-show="wordForm.category.$touched || wordForm.$submitted">
+                <div ng-messages-include="../../common/partial/messages.html"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="phonetically">phonetically:</label>
+              <input type="text" class="form-control" id="phonetically"
+                     placeholder="phonetically"
+                     name="phonetically" ng-model="word.phonetically">
+            </div>
+            <div class="form-group">
+              <label for="meaning">synonym:</label>
+              <input type="text" class="form-control" id="meaning"
+                     placeholder="meaning"
+                     name="meaning" ng-model="word.meaning">
+            </div>
+            <div class="form-group">
+              <label for="translate">translate:</label>
+              <input type="text" class="form-control" id="translate"
+                     placeholder="translate"
+                     name="translate" ng-model="word.translate">
+            </div>
+            <div class="form-group">
+              <label for="example">examples:</label>
+        <textarea class="form-control" id="example"
+                  name="example" ng-model="word.example"></textarea>
+            </div>
+          <!-- form -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success">Update</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

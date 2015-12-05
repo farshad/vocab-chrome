@@ -1,0 +1,24 @@
+<section class="partial flipInX" ng-controller="CategoryAddController">
+  <h3 style="margin: 0">Add New category</h3>
+  <hr style="margin: 10px 0 30px 0" />
+  <div class="col-md-5">
+    <form name="categoryForm" ng-submit="categoryForm.$valid && add()" novalidate>
+      <div class="form-group">
+        <label for="exampleInputEmail1">name:</label>
+        <input type="text" class="form-control"
+               placeholder="category name"
+               name="name" ng-model="category.name"
+               check-category-name
+               required>
+        <div class="help-block" ng-messages="categoryForm.name.$error"
+                                ng-show="categoryForm.name.$touched || categoryForm.$submitted">
+          <div ng-messages-include="../../common/partial/messages.html"></div>
+        </div>
+      </div>
+      <a href="#/category" class="btn btn-danger">back</a>
+      <button type="submit" class="btn btn-success">save</button>
+    </form>
+    <!-- form -->
+  </div>
+  <!-- /.col-md-3 -->
+</section>

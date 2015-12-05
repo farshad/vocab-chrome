@@ -1,0 +1,20 @@
+{
+  "name": "vocab-chrome",
+  "version": "0.0.0",
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "angular": "~1.4.7",
+    "angular-route": "~1.4.7",
+    "angular-animate": "~1.4.7",
+    "angular-messages": "~1.4.7",
+    "angular-resource": "~1.4.7",
+    "angular-sanitize": "~1.4.7",
+    "font-awesome": "~4.4.0",
+    "chosen": "~1.4.2",
+    "AngularJS-Toaster": "angularjs-toaster#~0.4.16"
+  },
+  "devDependencies": {
+    "chai": "~3.4.0",
+    "mocha": "~2.3.3"
+  }
+}
